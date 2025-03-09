@@ -117,33 +117,83 @@ python test.py --checkpoint-path ./checkpoints/vgg_E_bn_True_best.pth --vgg-conf
 ├── utils/                 # 유틸리티 스크립트 (Utility scripts)
 │   └── configs.py        # VGG 구성 설정 (VGG configuration settings)
 ├── checkpoints/           # 모델 체크포인트 저장 디렉토리 (Model checkpoint directory)
-├── train.py               # 학습 스크립트 (Training script)
-├── test.py                # 테스트 스크립트 (Testing script)
-└── quick_test.py          # 빠른 테스트 스크립트 (Quick test script)
+├── train_cifar10.py       # CIFAR-10 데이터셋 학습 스크립트 (CIFAR-10 training script)
+├── predict_any_image.py   # 이미지 예측 스크립트 (Image prediction script)
+└── extract_sample_image.py # 샘플 이미지 추출 스크립트 (Sample image extraction script)
 ```
 
-### 빠른 테스트 (Quick Test)
+### 테스트 스크립트 (Test Scripts)
 
-`quick_test.py` 스크립트를 사용하면 전체 학습 과정 없이 VGG 모델을 빠르게 테스트할 수 있습니다. 이 스크립트는 CIFAR-10 데이터셋의 일부를 사용하여 모델의 기본 기능을 검증합니다.
+프로젝트에는 VGG 모델을 테스트하기 위한 세 가지 주요 스크립트가 포함되어 있습니다:
+
+#### 1. CIFAR-10 학습 (train_cifar10.py)
+
+CIFAR-10 데이터셋을 사용하여 VGG 모델을 학습하는 스크립트입니다.
 
 ```bash
-# 기본 설정으로 빠른 테스트 실행 (1 에폭)
-python quick_test.py
+# 기본 설정으로 CIFAR-10 학습 실행
+python train_cifar10.py
 
-# 여러 에폭으로 테스트 실행
-python quick_test.py --epochs 5
+# 더 많은 에폭과 다른 학습률로 학습 실행
+python train_cifar10.py --epochs 10 --batch-size 128 --lr 0.01 --output my_model.pth
+```
+
+#### 2. 이미지 예측 (predict_any_image.py)
+
+학습된 모델을 사용하여 임의의 이미지를 분류하는 스크립트입니다.
+
+```bash
+# 특정 이미지 예측
+python predict_any_image.py --images path/to/image.jpg --model checkpoints/vgg_cifar10.pth
+
+# 여러 이미지 예측
+python predict_any_image.py --images image1.jpg image2.jpg image3.jpg --output-dir my_predictions
+```
+
+#### 3. 샘플 이미지 추출 (extract_sample_image.py)
+
+CIFAR-10 데이터셋에서 테스트용 샘플 이미지를 추출하는 스크립트입니다.
+
+```bash
+# 샘플 이미지 추출
+python extract_sample_image.py
 ```
 
 **English:**
 
-The `quick_test.py` script allows you to quickly test the VGG model without going through the full training process. This script uses a subset of the CIFAR-10 dataset to validate the basic functionality of the model.
+The project includes three main scripts for testing the VGG model:
+
+#### 1. CIFAR-10 Training (train_cifar10.py)
+
+Script to train the VGG model using the CIFAR-10 dataset.
 
 ```bash
-# Run quick test with default settings (1 epoch)
-python quick_test.py
+# Run CIFAR-10 training with default settings
+python train_cifar10.py
 
-# Run test with multiple epochs
-python quick_test.py --epochs 5
+# Run training with more epochs and different learning rate
+python train_cifar10.py --epochs 10 --batch-size 128 --lr 0.01 --output my_model.pth
+```
+
+#### 2. Image Prediction (predict_any_image.py)
+
+Script to classify arbitrary images using the trained model.
+
+```bash
+# Predict a specific image
+python predict_any_image.py --images path/to/image.jpg --model checkpoints/vgg_cifar10.pth
+
+# Predict multiple images
+python predict_any_image.py --images image1.jpg image2.jpg image3.jpg --output-dir my_predictions
+```
+
+#### 3. Sample Image Extraction (extract_sample_image.py)
+
+Script to extract sample images from the CIFAR-10 dataset for testing.
+
+```bash
+# Extract sample images
+python extract_sample_image.py
 ```
 
 ### 데이터셋 (Dataset)

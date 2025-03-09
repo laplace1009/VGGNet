@@ -171,3 +171,17 @@ cython_debug/
 .pypirc
 
 data
+
+# Sample images
+class_0_airplane.png
+class_1_automobile.png
+class_2_bird.png
+class_3_cat.png
+class_4_deer.png
+class_5_dog.png
+class_6_frog.png
+class_7_horse.png
+class_8_ship.png
+class_9_truck.png
+
+checkpoints
